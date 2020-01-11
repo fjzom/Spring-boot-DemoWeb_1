@@ -40,7 +40,7 @@ public class CustomerController {
 		log.info("Edit customer");
 		customerRepo.save(customer);
 	}
-	@DeleteMapping(value = "/deletecustomer/${customerId}")
+	@DeleteMapping(value = "/deletecustomer/{customerId}")
 	@ResponseBody
 	public void deleteCustomer(@PathVariable(name = "customerId") String customerId){
 		log.info("Remove customer");
