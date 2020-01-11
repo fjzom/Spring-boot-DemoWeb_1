@@ -1,0 +1,128 @@
+##Pre-requisites##
+run mongod server
+create postgres database
+https://www.gitignore.io/
+postman
+Install eclipse STS
+Create "Spring Starter Project"
+
+##Project##
+AppName DemoWeb
+	Add Spring Web Module
+	Add Thymeleaf
+	Add PostgreSQL Driver (install Postgresql, create db)
+	Add Spring DataMongoDB (install mongodb, run mongod)
+	Add Devtool	
+Create next project structure
+src/main/java
+	com.example 
+		DemoWebApplication.java
+		#AppConfig.java @Configuration @Bean#
+			#productDiscList() @Bean @Primary#
+			#productMSIList() @Bean#
+		#TextoPropertiesConfig.properties @Configuration @PropertySources#
+		#McvConfig.java implements WebMvcConfigurer @Configuration #
+			#addResourceHandler() @override#
+	com.example.model
+		Customer.java	@Document(collection = "customers")  @GeneratedValue @Column
+			customerId @Id
+			name #@NotEmpty @Size#
+			#customerAt @Column @Temporal @DateTmeFormat @PrePersist#
+			#Photo#
+		Product.java  @Entity @Table @Id  @Column 
+			#Product() constructor#
+			#Product() constructor parameters#
+			productId	@Id @GeneratedValue
+			name
+			price
+			offerType		
+			
+		#Offer.java       @Component @Autowired @Qualifier  #
+			#productOfferList #
+			#intit()	 @PostConstruct#
+			#destroy() @PreDestroy#
+	com.example.repository
+		ICostumerRepo.java - extends MongoRepository
+		IProductRepo.java  - extends JpaRepository		
+	com.example.controller
+		CustomerController.java - @Controller @RequestMapping @Autowired @Value
+			#createCustomer()	-@GetMapping#
+			#createCustomer()	-@PostMapping @Valid #
+			#view() 	-	@GetMapping @PathVariable#
+			addCustomer() - @PostMapping @ResponseBody @RequestBody 
+			editCustomer() - @PutMapping @ResponseBody @RequestBody 
+			deleteCustomer() - @DeleteMapping @ResponseBody @PathVariable
+			#deleteCustomer() - @GetMapping#
+			getAllCustomers()- @GetMapping
+			#getAllJsons() @GetMapping @ResponseBody#
+		ProductController.java  - @Controller @ResponseBody(opcional) @RequestMapping    @Autowired    @Value
+			addProduct()   	    @RequestMapping post @RequestParam
+			getAllProducts()    @RequestMapping get
+		#OfferController.java	@Controller @RequestMapping @Autowired #
+			#availableOffers()			@GetMapping#
+src/main/resources
+	static
+		css 
+		javascript
+	templates 
+		#layout	#
+			#layout.html#
+		customer.html
+		products.html
+		#customerForm.html#
+		#view.html#
+	application.properties
+	#messages.properties#	
+#uploads#
+	#image.png#		 
+	
+	
+##application.properties##
+server.port=4041
+
+
+		
+##Local MongoDB config ##
+spring.data.mongodb.database=customer_db
+spring.data.mongodb.port=27017
+spring.data.mongodb.host=localhost
+
+##postgres config##
+spring.jpa.database=POSTGRESQL
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost/demo3
+spring.datasource.username=postgres
+spring.datasource.password=123
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
+
+spring.main.allow-bean-definition-overriding=true
+
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+	
+
+##Extra##
+Basic->offers->delete&form->layouts->view
+https://spring.io/blog/2013/05/11/content-negotiation-using-spring-mvc
+
+##Common Erros##
+Main calss not found SpringBootApplication
+ZipException: invalid LOC header
+NoClassDefFoundError
+NoClassDefFoundException
+Solution: eliminate .m2 folder
+
+##Annotations##
+@ModelAttribute sirve para popular dropbox, checkbox, radiobutton en cualquier ruta del controlador que tenga la variable
+
+##How to pass data to the view##
+ Map<String, Object> map,Model model, ModelMap map, ModelAndVeiw mv
+
+##LVL 2##
+Spring Security
+heroku
+
+ 
